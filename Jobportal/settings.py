@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5u$mvpna5_!=!(bu&b3#j--izv=!_d_jy#ow+ir&^cme-j3$63
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -118,7 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = '/home/jobportaldemo/Job-portal/myapp/static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
