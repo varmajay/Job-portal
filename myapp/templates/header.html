@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Job Portal </title>
+  <style>
+    .dropbtn {
+      background-color:#0d1014;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color:green;}
+    
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    .dropdown:hover .dropbtn {background-color:#fa9d11;}
+    </style>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css'%}" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="{% url 'index'%}">
+            <span>
+              Job Portal 
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'index'%}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                </ul> 
+                {% if user.is_authenticated %}
+                  <div class="dropdown">
+                    <button class="dropbtn">Jobs</button>
+                    <div class="dropdown-content">
+                      <a href="{% url 'job_post'%}">Post Job</a>
+                      <a href="{% url 'view_job_post'%}">View Post Job</a>
+                    </div>
+                  </div>
+                  <div class="dropdown">
+                    <button class="dropbtn">Application</button>
+                    <div class="dropdown-content">
+                      <a href="{% url 'view_application'%}">View Applications </a>
+                    </div>
+                  </div>
+                </ul>
+                {% else %}
+                <li class="nav-item active">
+                  <li class="nav-item">
+                    <div class="dropdown">
+                      <button class="dropbtn">Jobs</button>
+                      <div class="dropdown-content">
+                        <a href="{%url 'job_filter' 0 %}" style="text-transform: uppercase;" class="dropdown-item">all</a>
+                        <a href="{%url 'job_filter' 1 %}" style="text-transform: uppercase;" class="dropdown-item">marketing</a>
+                        <a href="{%url 'job_filter' 2 %}" style="text-transform: uppercase;" class="dropdown-item">customer service</a>
+                        <a href="{%url 'job_filter' 3 %}" style="text-transform: uppercase;" class="dropdown-item">human resource</a>
+                        <a href="{%url 'job_filter' 4 %}" style="text-transform: uppercase;" class="dropdown-item">project management</a>
+                        <a href="{%url 'job_filter' 5 %}" style="text-transform: uppercase;" class="dropdown-item">business devlopment</a>
+                        <a href="{%url 'job_filter' 6 %}" style="text-transform: uppercase;" class="dropdown-item">sales & communication</a>
+                        <a href="{%url 'job_filter' 7 %}" style="text-transform: uppercase;" class="dropdown-item">teaching & education</a>
+                        <a href="{%url 'job_filter' 8 %}" style="text-transform: uppercase;" class="dropdown-item">information technology</a>
+                      </div>
+                    </div>
+                  </li> 
+                {% endif %}
+              <ul class="user_option navbar-nav">
+                {% if user.is_authenticated %}
+                <div class="dropdown">
+                  <button class="dropbtn"><img src="{{request.user.profile.url}}" alt="profile" style="height: 25px;width: 25px; border-radius: 50%;">{{request.user.name}}</button>
+                  <div class="dropdown-content">
+                  <a class="nav-link " href="{% url 'hr_profile'%}">  <span>Profile</span> </a>
+                  <a class="nav-link" href="{% url 'user_logout'%}">  <span>Logout</span> </a>  
+                  </div>
+                </div>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'user_login'%}"> <img src="{% static 'images/login.png'%}" alt=""> <span>Login</span> </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register'%}"> <img src="{% static 'images/register.png'%}" alt="">
+                    <span>Register</span></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+{% block content %}
+
+{% endblock %}
+
+  <!-- info section -->
+  <section class="info_section layout_padding2-bottom layout_padding-top">
+    <div class="container info_content">
+
+      <div>
+        <div class="row">
+          <div class="col-md-3 about_links">
+            <div class="d-flex">
+              <h5>
+                About Us
+              </h5>
+            </div>
+            <div class="d-flex ">
+              <ul>
+                <li>
+                  <a href="">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    About services
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="d-flex">
+              <h5>
+                Jobs
+              </h5>
+            </div>
+            <div class="d-flex ">
+              <ul>
+                <li>
+                  <a href="">
+                    established fact that a
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    reader will be
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    distracted by the
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    readable content of a
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="d-flex">
+              <h5>
+                Services
+              </h5>
+            </div>
+            <div class="d-flex ">
+              <ul>
+                <li>
+                  <a href="">
+                    established fact that a
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    reader will be
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    distracted by the
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    readable content of a
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="d-flex">
+              <h5>
+                Useful Link
+              </h5>
+            </div>
+            <div class="d-flex ">
+              <ul>
+                <li>
+                  <a href="">
+                    established fact that a
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    reader will be
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    distracted by the
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    readable content of a
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-3  mt-2">
+          <div class="social-box">
+            <a href="">
+              <img src="{% static 'images/fb.png'%}" alt="" />
+            </a>
+
+            <a href="">
+              <img src="{% static 'images/twitter.png'%}" alt="" />
+            </a>
+            <a href="">
+              <img src="{% static 'images/linkedin.png'%}" alt="" />
+            </a>
+            <a href="">
+              <img src="{% static 'images/insta.png'%}" alt="" />
+            </a>
+          </div>
+
+        </div>
+        <div class="col-lg-9">
+          <div class="form_container mt-2">
+            <form action="">
+              <label for="subscribeMail">
+                Newsletter
+              </label>
+              <input type="email" placeholder="Enter Your email" id="subscribeMail" />
+              <button type="submit">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; 2022 All Rights Reserved By
+      <a href="https://html.design/">Job Portal</a>
+    </p>
+  </footer>
+  <!-- footer section -->
+
+
+  <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.js'%}"></script>
+
+</body>
+
+</html>
+{% for msg in messages %}
+<script>
+  alert('{{msg}}')
+</script>
+{% endfor %}

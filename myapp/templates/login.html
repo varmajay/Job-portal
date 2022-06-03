@@ -1,0 +1,46 @@
+{% load static %}
+<link href="{% static 'css/login.css'%}" rel="stylesheet" />
+
+<br>
+<br>
+    <div class="cont">
+        <div class="form sign-in">
+            <form action="{% url 'user_login'%}" method="post">
+            {% csrf_token %}
+            <h2>Welcome</h2>
+            <label>
+                <span>Email</span>
+                {{form.email}}
+            </label>
+            <label>
+                <span>Password</span>
+                {{form.password}}
+            </label>
+            <a href="{% url 'forget_password'%}">
+            <p class="forgot-pass">Forgot password?</p></a>
+            <button type="submit" class="submit">Login</button>
+        </form>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                 
+                    <h3>Don't have an account? Please Register!<h3>
+                </div>
+                <div class="img__text m--in">
+                
+                    <h3>If you already has an account, just sign in.<h3>
+                </div>
+                <a href="{% url 'register'%}">
+                <div class="img__btn">
+                    <span class="m--up">Register</span>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% for msg in messages %}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}

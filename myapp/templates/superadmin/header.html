@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Job Portal </title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="{% static 'admin/image/png'%}" sizes="16x16" href="{% static 'admin/images/favicon.png'%}">
+    <!-- Pignose Calender -->
+    <link href="{% static 'admin/plugins/pg-calendar/css/pignose.calendar.min.css'%}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{% static 'admin/plugins/chartist/css/chartist.min.css'%}">
+    <link rel="stylesheet" href="{% static 'admin/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css'%}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'admin/css/style.css'%}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="{% url 'index_admin'%}">
+                    <b class="logo-abbr"><img src="{% static 'admin/images/logo.png'%}" alt=""> </b>
+                    <span class="logo-compact"><img src="{% static 'admin/images/logo-compact.png'%}" alt=""></span>
+                    <span class="brand-title">
+                        Job Portal 
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="{{request.user.profile.url}}" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'admin_profile'%}"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                        <li><a href="{% url 'user_logout'%}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li>
+                        <a  href="{% url 'index_admin'%}" aria-expanded="false">
+                            <i class="icon-speedometer"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-user"></i> <span class="nav-text">HR</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'view_hr'%}">View</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Application</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'view_app'%}">View application</a></li>
+                        </ul>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        {% block content %}
+
+
+        {% endblock %}
+
+              
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy;Job Portal</a> 2022</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- <script src="jquery-3.6.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'admin/plugins/common/common.min.js'%}"></script>
+    <script src="{% static 'admin/js/custom.min.js'%}"></script>
+    <script src="{% static 'admin/js/settings.js'%}"></script>
+    <script src="{% static 'admin/js/gleek.js'%}"></script>
+    <script src="{% static 'admin/js/styleSwitcher.js'%}"></script>
+
+    <!-- Chartjs -->
+    <script src="{% static 'admin/plugins/chart.js/Chart.bundle.min.js'%}"></script>
+    <!-- Circle progress -->
+    <script src="{% static 'admin/plugins/circle-progress/circle-progress.min.js'%}"></script>
+    <!-- Datamap -->
+    <script src="{% static 'admin/plugins/d3v3/index.js'%}"></script>
+    <script src="{% static 'admin/plugins/topojson/topojson.min.js'%}"></script>
+    <script src="{% static 'admin/plugins/datamaps/datamaps.world.min.js'%}"></script>
+    <!-- Morrisjs -->
+    <script src="{% static 'admin/plugins/raphael/raphael.min.js'%}"></script>
+    <script src="{% static 'admin/plugins/morris/morris.min.js'%}"></script>
+    <!-- Pignose Calender -->
+    <script src="{% static 'admin/plugins/moment/moment.min.js'%}"></script>
+    <script src="{% static 'admin/plugins/pg-calendar/js/pignose.calendar.min.js'%}"></script>
+    <!-- ChartistJS -->
+    <script src="{% static 'admin/plugins/chartist/js/chartist.min.js'%}"></script>
+    <script src="{% static 'admin/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js'%}"></script>
+
+
+
+    <script src="{% static 'admin/js/dashboard/dashboard-1.js'%}"></script> 
+
+</body>
+
+</html>

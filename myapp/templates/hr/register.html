@@ -1,0 +1,61 @@
+{% load static %}
+<link href="{% static 'css/login.css'%}" rel="stylesheet" />
+
+<br>
+<br>
+    <div class="cont">
+        <div class="form sign-in">
+            <form action="{% url 'register'%}" method="post">
+                {% csrf_token %}
+                {% for msg in messages %}
+                <p style="color: red;">{{msg}}</p>
+                {% endfor %}
+                <h2>Welcome</h2>
+            <label>
+                <span>Company name</span>
+                {{form.name}}
+            </label>
+            <label>
+                <span>email</span>
+                {{form.email}}
+            </label>
+            <label>
+                <span>Phone</span>
+                {{form.phone}}
+            </label>
+            <label>
+                <span>password</span>
+                {{form.password1}}
+            </label>
+            <label>
+                <span> Confirm password</span>
+                {{form.password2}}
+            </label>
+            
+            <button type="submit" class="submit">Register</button>
+        </form>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--in">
+                 
+                    <h3>Don't have an account? Please Register!<h3>
+                </div>
+                <div class="img__text m--up">
+                
+                    <h3>If you already has an account, just Login.<h3>
+                </div>
+                <a href="{% url 'user_login'%}">
+                    <div class="img__btn">
+                        <span class="m--up">Login</span>
+                    </div>
+                    </a>
+            </div>
+            
+        </div>
+    </div>
+{% if msg %}
+    <script>alert("{{msg}}")</script>
+{% endif %}
+
+
