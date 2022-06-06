@@ -26,29 +26,35 @@ def index_admin(request):
 
 
 def user_login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        # print(form)
-        if form.is_valid():
-            user = authenticate(email = form.cleaned_data['email'],password = form.cleaned_data['password'])
-            # print(user)
-            if user is not None:
-                if user.role == 'admin':
-                    if user.is_active:
-                        login(request, user)
-                        return redirect('index_admin')
-                else:
-                    if user.is_active:
-                        login(request, user)
-                        return redirect('index')
-            else:
-                msg = "Enter correct username or password"
-                return render(request,'login.html',{'form':form,'msg':msg})
-        msg = "Enter correct username or password 2"
-        return render(request,'login.html',{'form':form,'msg':msg})
+    if request.user.is_authenticated:
+        if request.user.role == 'admin':
+            return redirect('index_admin')
+        else:
+            return redirect('index')
     else:
-        form = LoginForm()
-    return render(request,'login.html',{'form':form})
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+            # print(form)
+            if form.is_valid():
+                user = authenticate(email = form.cleaned_data['email'],password = form.cleaned_data['password'])
+                # print(user)
+                if user is not None:
+                    if user.role == 'admin':
+                        if user.is_active:
+                            login(request, user)
+                            return redirect('index_admin')
+                    else:
+                        if user.is_active:
+                            login(request, user)
+                            return redirect('index')
+                else:
+                    msg = "Enter correct username or password"
+                    return render(request,'login.html',{'form':form,'msg':msg})
+            msg = "Enter correct username or password 2"
+            return render(request,'login.html',{'form':form,'msg':msg})
+        else:
+            form = LoginForm()
+        return render(request,'login.html',{'form':form})
 
 
 def user_logout(request):
