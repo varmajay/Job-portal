@@ -110,7 +110,7 @@ def register(request):
     # print(form)
     if request.method == "POST":
         form= RegisterFrom(request.POST)
-        print(form)
+        # print(form)
         if form.is_valid():
             message = f"""Hello your username is {form.cleaned_data['email']},
             and Your password is {form.cleaned_data['password1']}"""
@@ -120,8 +120,10 @@ def register(request):
             form.save()
             messages.success(request,'your account created')
             return redirect('user_login')
-        msg = "Please Enter a Valid data "
-        return render(request,'hr/register.html',{'msg':msg,'form':form})
+        else:
+            messages.error(request,form.errors)
+            print(messages.error(request,form.errors))
+            return render(request,'hr/register.html',{'form':form})
     else:
         form= RegisterFrom()
     return render(request,'hr/register.html',{'form':form})
